@@ -1,47 +1,112 @@
 # 🩸 VidaLink V2
 
+> A modern blood donation platform built with Software Engineering best practices.
+
 Welcome to **VidaLink V2**! 🚀
 
 VidaLink is a web application designed to encourage blood donation through gamification. Users can submit proof of donation, earn points after their donation is verified, and redeem those points for rewards provided by partner organizations.
 
+This repository contains the complete redesign of the original project, with a focus on software architecture, maintainability, scalability, and engineering practices.
+
+---
+
 ## 🎯 The Problem
 
-Blood donation is a constant challenge in many communities. During the development of the original version, my team noticed that only a small percentage of students in our course were regular blood donors.
+Blood donation remains a constant challenge in many communities.
 
-VidaLink was created to make the donation process more engaging and to encourage people to become recurring donors through a reward-based experience.
+During the development of the original version, my team noticed that only a small percentage of students in our course donated blood regularly.
+
+VidaLink was created to make the donation process more engaging by rewarding donors and encouraging recurring donations through a gamified experience.
+
+---
+
+## ✨ Version 2 Goals
+
+Version 2 is not just a refactoring.
+
+It is a complete redesign focused on applying Software Engineering concepts and modern development practices.
+
+The main objectives are:
+
+- 🏗️ Improve the overall architecture.
+- 📦 Organize the project using **Layered Architecture** and **Package by Feature**.
+- 📐 Apply SOLID principles.
+- 🧩 Use Design Patterns where appropriate.
+- 📚 Put into practice the concepts learned during my postgraduate studies.
+- 🧪 Increase code quality with automated tests.
+- 📖 Document architectural decisions using ADRs.
+- 📊 Create UML diagrams for documentation.
+- 🐳 Improve the development environment with Docker.
+- 🚀 Build a more robust, scalable, and maintainable application.
+
+---
 
 ## 🛠️ Tech Stack
 
-* ☕ Java 21
-* 🌱 Spring Boot
-* 🅰️ Angular 22
-* 🐘 PostgreSQL
-* 🐳 Docker
-* 📊 Grafana
-* 🐙 Git & GitHub
+### Backend
 
-## 🎯 Goals for Version 2
+- ☕ Java 21
+- 🌱 Spring Boot
 
-This version is a complete refactoring of the original project with a strong focus on Software Engineering practices.
+### Frontend
 
-Some of the main goals are:
+- 🅰️ Angular 22
 
-* 🏗️ Improve the overall architecture.
-* 📐 Apply SOLID principles.
-* 📚 Put into practice the concepts learned during my postgraduate studies.
-* 🧪 Increase code quality with testing.
-* 📖 Improve documentation with UML diagrams and ADRs (Architectural Decision Records).
-* 🚀 Build a more robust, scalable, and maintainable application.
+### Database
+
+- 🐘 PostgreSQL
+
+### DevOps
+
+- 🐳 Docker
+- 📊 Grafana
+
+### Version Control
+
+- 🐙 Git
+- GitHub
+
+---
+
+## 📚 Documentation
+
+Project documentation can be found inside the `docs` directory.
+
+It includes:
+
+- 📖 Refactoring Plan
+- 🏛️ Architectural Decision Records (ADRs)
+- 📐 UML Diagrams
+- 🧠 Domain Modeling
+- 📋 Requirements
+- 🔍 Architecture Documentation
+
+---
 
 ## 🗺️ Roadmap
 
-- [x] Create the new repository
-- [x] Define the project documentation
+### Planning
+
+- [x] Create the repository
+- [x] Define the documentation structure
+- [ ] Write ADRs
 - [ ] Model the domain
-- [ ] Design the system architecture
-- [ ] Develop the backend
-- [ ] Develop the frontend
-- [ ] Implement automated tests
-- [ ] Dockerize the application
-- [ ] Monitoring with Grafana
+- [ ] Create UML diagrams
+
+### Development
+
+- [ ] Implement the backend
+- [ ] Implement the frontend
+- [ ] Add automated tests
+- [ ] Configure Docker
+- [ ] Configure monitoring with Grafana
+
+### Deployment
+
 - [ ] Deploy the application
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
