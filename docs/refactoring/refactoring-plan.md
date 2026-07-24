@@ -69,8 +69,8 @@ The following elements will be removed during the refactoring process:
 
 - [x] Recover Version 1
 - [x] Analyze the existing architecture
-- [ ] Redesign the domain model
-- [ ] Create UML diagrams
+- [x] Redesign the domain model
+- [x] Create UML diagrams
 - [ ] Implement the new backend
 - [ ] Implement the new frontend
 - [ ] Add automated tests
