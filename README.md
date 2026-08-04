@@ -89,9 +89,9 @@ It includes:
 
 - [x] Create the repository
 - [x] Define the documentation structure
-- [ ] Write ADRs
-- [ ] Model the domain
-- [ ] Create UML diagrams
+- [X] Write ADRs
+- [X] Model the domain
+- [X] Create UML diagrams
 
 ### Development
 
