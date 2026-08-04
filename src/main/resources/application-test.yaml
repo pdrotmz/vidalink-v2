@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: vidalink
+  datasource:
+    url: jdbc:postgresql://localhost:5432/vidalink_test
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+server:
+  port: 8080
+jwt:
+  secret: 9d2a1d7e4c5f6b8a9f0d1c2b3a4e5f679d2a1d7e4c5f6b8a9f0d1c2b3a4e5f67
+  expiration: 86400000
