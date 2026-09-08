@@ -42,12 +42,28 @@ public class SupabaseFileStorage implements FileStorage {
         try {
             byte[] content = inputStream.readAllBytes();
 
+            String[] pathSegments = path.split("/");
+
             supabaseRestClient.post()
-                    .uri("/storage/v1/object/{bucket}/{path}", bucket, path)
+                    .uri(uriBuilder -> {
+                        uriBuilder
+                                .path("/storage/v1/object")
+                                .pathSegment(bucket);
+
+                        for (String segment : pathSegments) {
+                            uriBuilder.pathSegment(segment);
+                        }
+
+                        return uriBuilder.build();
+                    })
                     .header("Authorization", "Bearer " + serviceRoleKey)
                     .header("apikey", serviceRoleKey)
                     .header("x-upsert", "true")
-                    .contentType(MediaType.parseMediaType(contentType))
+                    .contentType(
+                            contentType != null
+                                    ? MediaType.parseMediaType(contentType)
+                                    : MediaType.APPLICATION_OCTET_STREAM
+                    )
                     .body(content)
                     .retrieve()
                     .toBodilessEntity();
