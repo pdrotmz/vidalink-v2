@@ -5,12 +5,18 @@ import io.minio.GetObjectArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 
 @Component
 @RequiredArgsConstructor
+@ConditionalOnProperty(
+        name = "storage.provider",
+        havingValue = "minio",
+        matchIfMissing = true
+)
 public class MinioFileStorage implements FileStorage {
 
     private final MinioClient minioClient;
