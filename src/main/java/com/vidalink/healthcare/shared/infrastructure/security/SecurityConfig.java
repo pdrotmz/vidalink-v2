@@ -3,6 +3,7 @@ package com.vidalink.healthcare.shared.infrastructure.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -66,18 +67,23 @@ public class SecurityConfig {
 
                         // ADMIN - Rewards
                         .requestMatchers(
-                                "/api/rewards/create",
+                            HttpMethod.POST, "/api/rewards/create"
+                        ).hasRole("ADMIN")
+
+                        .requestMatchers(
+                                HttpMethod.PATCH,
                                 "/api/rewards/update/{id}",
-                                "/api/rewards/id/{id}/deactivate"
+                                "/api/rewards/id/{id}/deactivate",
+                                "/api/rewards/id/{id}/image"
                         ).hasRole("ADMIN")
 
                         // AUTHENTICATED - Rewards
                         .requestMatchers(
-                                "/api/rewards/",
-                                "/api/rewards/id/{id}",
-                                "/api/rewards/name/{name}",
-                                "/api/rewards/search",
-                                "/api/rewards/id/{id}/image"
+                            HttpMethod.GET,
+                            "/api/rewards/",
+                            "/api/rewards/id/{id}",
+                            "/api/rewards/name/{name}",
+                            "/api/rewards/search"
                         ).authenticated()
 
                         // AUTHENTICATED - Redemptions
