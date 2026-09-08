@@ -24,8 +24,11 @@ minio:
 
 supabase:
   url: ${SUPABASE_URL}
-  service-role-play: ${SUPABASE_SERVICE_ROLE_KEY}
+  service-role-key: ${SUPABASE_SERVICE_ROLE_KEY}
   bucket: ${SUPABASE_BUCKET}
+
+storage:
+  provider: ${STORAGE_PROVIDER}
 
 jwt:
   secret: ${JWT_SECRET}
