@@ -1,5 +1,6 @@
 package com.vidalink.healthcare.assessment.presentation.controller;
 
+import com.vidalink.healthcare.assessment.application.dto.SubmissionFileResponse;
 import com.vidalink.healthcare.assessment.application.dto.SubmissionResponse;
 import com.vidalink.healthcare.assessment.application.usecase.*;
 import com.vidalink.healthcare.assessment.domain.enums.ValidationStatus;
@@ -12,6 +13,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +40,7 @@ public class SubmissionController {
     private final GetSubmissionByIdUseCaseImpl getSubmissionByIdUseCase;
     private final GetSubmissionsByIdUserUseCaseImpl getSubmissionsByIdUserUseCase;
     private final GetSubmissionsByStatusUseCaseImpl getSubmissionsByStatusUseCase;
+    private final GetSubmissionFileUseCaseImpl getSubmissionFileUseCase;
     private final UpdateStatusSubmissionUseCaseImpl updateStatusSubmissionUseCase;
     private final DeleteSubmissionByIdUseCaseImpl deleteSubmissionByIdUseCase;
 
@@ -101,6 +105,17 @@ public class SubmissionController {
             @Valid ValidationStatus status) {
         List<SubmissionResponse> responses = getSubmissionsByStatusUseCase.execute(status);
         return ResponseEntity.accepted().body(responses);
+    }
+
+    @GetMapping("/id/{id}/file")
+    public ResponseEntity<Resource> getFile(@PathVariable UUID id) {
+
+        SubmissionFileResponse file = getSubmissionFileUseCase.execute(id);
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.parseMediaType(file.contentType()))
+                .body(new InputStreamResource(file.inputStream()));
     }
 
     @Operation(summary = "Approve submission", description = "Update status submission by its id")

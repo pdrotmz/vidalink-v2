@@ -111,6 +111,11 @@ public class SecurityConfig {
                                 "/api/submissions/id/delete/{id}"
                         ).hasRole("ADMIN")
 
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/submissions/id/{id}/file"
+                        ).hasRole("ADMIN")
+
                         // AUTHENTICATED - User
                         .requestMatchers(
                                 "/api/users/me"

@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 @Component
@@ -68,11 +69,7 @@ public class SupabaseFileStorage implements FileStorage {
                     .retrieve()
                     .toBodilessEntity();
 
-            return supabaseUrl
-                    + "/storage/v1/object/public/"
-                    + bucket
-                    + "/"
-                    + path;
+            return path;
 
         } catch (Exception exception) {
             throw new RuntimeException(
@@ -84,9 +81,38 @@ public class SupabaseFileStorage implements FileStorage {
 
     @Override
     public InputStream download(String path) {
-        throw new UnsupportedOperationException(
-                "Supabase images are served through their public URL"
-        );
+        try {
+            byte[] content = supabaseRestClient.get()
+                    .uri(uriBuilder -> {
+                        uriBuilder
+                                .path("/storage/v1/object/authenticated")
+                                .pathSegment(bucket);
+
+                        for (String segment : path.split("/")) {
+                            uriBuilder.pathSegment(segment);
+                        }
+
+                        return uriBuilder.build();
+                    })
+                    .header("Authorization", "Bearer " + serviceRoleKey)
+                    .header("apikey", serviceRoleKey)
+                    .retrieve()
+                    .body(byte[].class);
+
+            if (content == null) {
+                throw new RuntimeException(
+                        "Empty response while downloading file from Supabase"
+                );
+            }
+
+            return new ByteArrayInputStream(content);
+
+        } catch (Exception exception) {
+            throw new RuntimeException(
+                    "Error downloading file from Supabase",
+                    exception
+            );
+        }
     }
 
     @Override
